@@ -14,7 +14,7 @@ room, cancel a room, check in and check out.
 
 
 
-#COMPILATION AND TESTING :
+# COMPILATION AND TESTING :
 
 - Compiled using intelliJ IDE version = 2017.3.4, jdk = 8 on Debian Operating System.
 
