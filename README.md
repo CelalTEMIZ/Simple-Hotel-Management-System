@@ -1,6 +1,7 @@
 # Simple Hotel Management System
 
 SCENARIO:
+
 ● The hotel holds only rooms.
 
 ● The management system’s users are receptionist and hotel guests. System
