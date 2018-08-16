@@ -12,6 +12,7 @@ room, cancel a room, check in and check out.
 
 ● Use csv files to keep records.
 
+COMPILATION AND TESTING :
 
 - Compiled using intelliJ IDE version = 2017.3.4, jdk = 8 on Debian Operating System.
 
