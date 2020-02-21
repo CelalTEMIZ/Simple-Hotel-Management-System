@@ -15,8 +15,6 @@ public class Guest extends Person {
     // Hotel guests
     private ArrayList<Person> hotelGuests = new ArrayList<>();
 
-    final String header = "ReservationType, Name, Surname, Identification Number, Address, Phone Number, E-Posta, Room Type, Room No, Night Stay, Room Price ( $ )";
-
     /**
      * Class constructor without parameter
      */
@@ -119,7 +117,6 @@ public class Guest extends Person {
         {
             if (roomList.get(i).getPersonObject().getPersonLastName().equals(guestSurname))
             {
-                //System.out.println(roomList.get(i).toString());
                 return  roomList.get(i).toString();
             }
         }
@@ -240,7 +237,7 @@ public class Guest extends Person {
                     {
                         System.out.println("\nYour reservation operation is successful !!\n");
                         System.out.println("**** Your reservation detail ****");
-                        System.out.println(header);
+                        System.out.println(Constants.RECORD_LIST_HEADER);
                         System.out.println(getRoomDetail(roomNo));
                     }
                 }
@@ -251,7 +248,7 @@ public class Guest extends Person {
                     System.out.println("Enter your surname ");
                     lastName = input.next();
 
-                    System.out.printf("\n%s\n", header);
+                    System.out.printf("\n%s\n", Constants.RECORD_LIST_HEADER);
                     System.out.println(getRoomDetailToGuest(lastName));
 
                     System.out.println("\nEnter your room number ");

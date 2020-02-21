@@ -9,10 +9,6 @@ public class ManagementSystemTestTest {
     {
 
         try {
-
-            final String header = "ReservationType,Name,Surname,Identification Number,Address,Phone Number,E-Posta," +
-                    " Room Type,Room No,Night Stay,Room Price ($)";
-
             // Create test objects
             Receptionist r1 = new Receptionist();
 
@@ -93,12 +89,12 @@ public class ManagementSystemTestTest {
             // Reservation check-in test
             assertEquals(true,r1.checkRoomStatus(1111));
             System.out.println("Receptionist Check-in test is succesfull !");
-            r1.saveTheRecords(header+", Check-in Date",1111);
+            r1.saveTheRecords(Constants.RECORD_LIST_HEADER+", Check-in Date",1111);
 
             // Reservation check-out test
             assertEquals(true,r1.checkRoomStatus(1111));
             System.out.println("Receptionist Check-out test is succesfull !");
-            r1.saveTheRecords(header+", Check-out Date",1111);
+            r1.saveTheRecords(Constants.RECORD_LIST_HEADER+", Check-out Date",1111);
 
             } catch(Exception E) {
                 System.out.println("An Exception Caught : " + E);

@@ -14,10 +14,6 @@ public abstract class Person implements PersonInterface {
     protected String personType;                // a person who makes the reservation
     protected String firstName;                 // System user name
     protected String lastName;                  // System user surname
-    protected String identificationNumber;      // System user ID number
-    protected String address;                   // System user contact address
-    protected String phoneNumber;               // System user phone number
-    protected String mail;                      // System user e-posta
 
 
     // Keep the all reserved room details
@@ -89,31 +85,7 @@ public abstract class Person implements PersonInterface {
         return null;
     }
 
-    /**
-     * This method saves the reservation records to given csv file.
-     */
-    public void saveTheGuestRecord()
-    {
-        String filePath = "GuestReservations.csv";
 
-        try {
-            FileWriter fw = new FileWriter(filePath, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-
-            pw.println("ReservationType, Name, Surname, Identification Number, Address, Phone Number, E-Posta, Room Type, Room No, Night Stay, Room Price ( $ )");
-
-            for (int i = 0; i < roomList.size(); i++)
-            {
-                pw.println(roomList.get(i).toString());
-            }
-
-            pw.flush();
-            pw.close();
-        } catch(Exception E){
-            System.out.println("Exception Caught : " + E);
-        }
-    }
 
 
     /**
@@ -123,7 +95,7 @@ public abstract class Person implements PersonInterface {
      */
     public boolean reservation(Rooms roomObject)
     {
-        this.roomList.add(roomObject);
+        roomList.add(roomObject);
         return true;
     }
 
@@ -149,7 +121,7 @@ public abstract class Person implements PersonInterface {
         {
             if (roomList.get(i).getRoomNo() == roomNo)
             {
-                this.roomList.remove(i);
+                roomList.remove(i);
                 return true;
             }
         }
@@ -175,6 +147,31 @@ public abstract class Person implements PersonInterface {
         }
 
         return false;
+    }
+
+    /**
+     * This method saves the reservation records to given csv file.
+     */
+    public void saveTheGuestRecord()
+    {
+
+        try {
+            FileWriter fw = new FileWriter(Constants.GUEST_RECORD_LIST_FILE_NAME, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            pw.println(Constants.RECORD_LIST_HEADER);
+
+            for (int i = 0; i < roomList.size(); i++)
+            {
+                pw.println(roomList.get(i).toString());
+            }
+
+            pw.flush();
+            pw.close();
+        } catch(Exception E){
+            System.out.println("Exception Caught : " + E);
+        }
     }
 
     /**
