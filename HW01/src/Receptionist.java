@@ -14,8 +14,11 @@ import java.util.Date;
 public class Receptionist extends Person
 {
 
-    final String header = "ReservationType,Name,Surname,Identification Number,Address,Phone Number,E-Posta," +
-        " Room Type,Room No,Night Stay,Room Price ($)";
+    final String header = Constants.RECORD_LIST_HEADER;
+    private String identificationNumber;      // System user ID number
+    private String address;                   // System user contact address
+    private String phoneNumber;               // System user phone number
+    private String mail;                      // System user e-posta
 
     /**
      * Class constructor without parameters
@@ -40,6 +43,7 @@ public class Receptionist extends Person
         this.lastName=lastName;
     }
 
+
     /**
      * Save the receptionist's reservation check-in and check-out records to given csv file.
      * @param header the String to record file header
@@ -47,11 +51,9 @@ public class Receptionist extends Person
      */
     public void saveTheRecords(String header,int roomNo)
     {
-        String fileName = "CheckIn-CheckOutRecords.csv";
 
         try {
-
-            FileWriter fw = new FileWriter(fileName, true);
+            FileWriter fw = new FileWriter(Constants.CHECK_IN_CHECK_OUT_LIST_FILE_NAME, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
@@ -69,6 +71,85 @@ public class Receptionist extends Person
             System.out.println("Exception Caught : " + E);
         }
     }
+
+    /**
+     *
+     * This method shows the reserved rooms details in the hotel.
+     */
+    public void showReservedRooms()
+    {
+        for (int i = 0; i < roomList.size(); i++)
+        {
+            System.out.println(roomList.get(i).toString());
+        }
+    }
+
+    /**
+     * Check the room state,according to the room no
+     * @param roomNo the integer to room no
+     * @return If the process is successful,return true.Otherwise,return false
+     */
+    public boolean checkRoomStatus(int roomNo)
+    {
+
+        for (int i = 0; i < roomList.size(); i++)
+        {
+            if (roomList.get(i).getRoomNo() == roomNo)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    /**
+     *
+     * @param roomNo the integer to reserved room no.
+     * @return the String for according to the given room no,reserved room details,
+     */
+    public String getRoomDetail(int roomNo)
+    {
+        String roomDetail;
+
+        for(int i=0; i<roomList.size(); ++i)
+        {
+            if (roomList.get(i).getRoomNo() == roomNo)
+            {
+                roomDetail = roomList.get(i).toString();
+                return roomDetail;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * This method saves the reservation records to given csv file.
+     */
+    public void saveTheGuestRecord()
+    {
+
+        try {
+            FileWriter fw = new FileWriter(Constants.GUEST_RECORD_LIST_FILE_NAME, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            pw.println(Constants.RECORD_LIST_HEADER);
+
+            for (int i = 0; i < roomList.size(); i++)
+            {
+                pw.println(roomList.get(i).toString());
+            }
+
+            pw.flush();
+            pw.close();
+        } catch(Exception E){
+            System.out.println("Exception Caught : " + E);
+        }
+    }
+
 
     /**
      * Receptionist Check out operation to guest
@@ -218,7 +299,6 @@ public class Receptionist extends Person
         try {
 
             int operationChoice,roomNo;
-
 
             Scanner input = new Scanner(System.in);
 
